@@ -15,7 +15,7 @@ variables:
     value: coIT.BewirbDich.Winforms.UI
   
 stages:
-  - template: ../.azure-piplelines/templates/stages/dotnet-build-stage.yaml
+  - template: ../.azure-pipelines/templates/stages/dotnet-build-stage.yaml
     parameters:
       solutionDirectory: ${{ variables.solutionDirectory }}
       runTests: $(EnableTests)
