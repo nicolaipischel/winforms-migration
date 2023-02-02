@@ -19,5 +19,5 @@ stages:
     parameters:
       solutionDirectory: ${{ variables.solutionDirectory }}
       skipTests: true
-      projectToPublish: ${{ variables.solutionDirectory }}/src/client/${{ variables.publishedProjectAssemblyName }}.csproj
+      projectToPublish: ${{ variables.solutionDirectory }}/${{ variables.publishedProjectAssemblyName }}/${{ variables.publishedProjectAssemblyName }}.csproj
       dotnetArtifactname: ${{ variables.dotnetArtifactname }}
