@@ -25,7 +25,7 @@ steps:
     inputs:
       command: build
       workingDirectory: ${{ parameters.solutionDirectory }}
-      arguments: --configuration $(BuildConfiguration)
+      arguments: --configuration $(BuildConfiguration) /p:EnableWindowsTargeting=true
 
   - task: DotNetCoreCLI@2
     condition: and(succeeded(), eq(${{ parameters.skipTests }}, false))
