@@ -2,8 +2,8 @@ parameters:
   - name: solutionDirectory
     displayName: The path to the dotnet solution (*.sln)
     type: string
-  - name: runTests
-    displayName: Value indication whether the tests should be executed or not
+  - name: skipTests
+    displayName: Value indicating whether the tests should be skipped
     type: boolean
     default: false  
   - name: projectToPublish
@@ -28,7 +28,7 @@ steps:
       arguments: --configuration $(BuildConfiguration)
 
   - task: DotNetCoreCLI@2
-    condition: and(succeeded(), eq(${{ parameters.runTests }}, true))
+    condition: and(succeeded(), eq(${{ parameters.skipTests }}, false))
     displayName: Running Tests
     inputs:
       command: test
@@ -36,7 +36,7 @@ steps:
       arguments: /p:CollectCoverage=true /p:CoverletOutput=$(Build.SourcesDirectory)/TestResult/ /p:CoverletOutputFormat=cobertura
 
   - task: PublishCodeCoverageResults@1
-    condition: and(succeeded(), eq(${{ parameters.runTests }}, true))
+    condition: and(succeeded(), eq(${{ parameters.skipTests }}, false))
     displayName: Uploading Coverage Results
     inputs:
       codeCoverageTool: Cobertura

@@ -2,9 +2,9 @@ parameters:
   - name: solutionDirectory
     displayName: The path to the dotnet solution (*.sln)
     type: string
-  - name: runTests
-    displayName: Value indication whether the tests should be executed or not
-    type: boolean
+  - name: skipTests
+    displayName: Value indication whether the tests should be skipped
+    type: string
     default: false
   - name: projectToPublish
     displayName: The path to the dotnet project that should be published
@@ -29,6 +29,6 @@ stages:
           - template: ../steps/dotnet-build-and-test.yaml
             parameters:
               solutionDirectory: ${{ parameters.solutionDirectory }}
-              runTests: ${{ parameters.runTests }}
+              skipTests: ${{ parameters.skipTests }}
               publishProjectPath: ${{ parameters.projectToPublish }}
               dotnetArtifactName: ${{ parameters.dotnetArtifactName }}

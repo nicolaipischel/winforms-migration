@@ -18,6 +18,5 @@ stages:
   - template: ../.azure-pipelines/templates/stages/dotnet-build-stage.yaml
     parameters:
       solutionDirectory: ${{ variables.solutionDirectory }}
-      runTests: $(EnableTests)
       projectToPublish: ${{ variables.solutionDirectory }}/src/client/${{ variables.publishedProjectAssemblyName }}.csproj
       dotnetArtifactname: ${{ variables.dotnetArtifactname }}
