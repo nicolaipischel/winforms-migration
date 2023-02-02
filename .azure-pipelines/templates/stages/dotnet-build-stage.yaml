@@ -30,5 +30,5 @@ stages:
             parameters:
               solutionDirectory: ${{ parameters.solutionDirectory }}
               skipTests: ${{ parameters.skipTests }}
-              publishProjectPath: ${{ parameters.projectToPublish }}
+              projectToPublish: ${{ parameters.projectToPublish }}
               dotnetArtifactName: ${{ parameters.dotnetArtifactName }}
