@@ -15,13 +15,13 @@ parameters:
     type: string
 
 stages:
-  - stage: DotnetBuildClientStage
-    display: Build
+  - stage: DotnetBuildStage
+    displayName: Build
     pool:
       vmImage: ubuntu-latest
     jobs:
       - job: DotnetBuild
-        displayName: Building .NET Client App
+        displayName: Building .NET Project
         workspace:
           clean: outputs
         steps:
