@@ -24,7 +24,7 @@ steps:
     displayName: Building .NET Application
     inputs:
       command: build
-      workingDirectory: ${{ parameters.solutionDir }}
+      workingDirectory: ${{ parameters.solutionDirectory }}
       arguments: --configuration $(BuildConfiguration)
 
   - task: DotNetCoreCLI@2
