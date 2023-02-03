@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Domain", "src\CodeSpire.Domain\CodeSpire.Domain.csproj", "{887BB639-1016-4979-8219-7CF94A45B79C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Application", "CodeSpire.Application\CodeSpire.Application.csproj", "{6ED1B34D-EA7F-4BAF-84B2-63A1B6BB5F21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Application", "src\CodeSpire.Application\CodeSpire.Application.csproj", "{6ED1B34D-EA7F-4BAF-84B2-63A1B6BB5F21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
