@@ -41,12 +41,6 @@ steps:
     inputs:
       codeCoverageTool: Cobertura
       summaryFileLocation: "$(Build.SourcesDirectory)/TestResult/**/*coverage.cobertura.xml"
-  
-  - script: pwd
-    displayName: what is my current location?
-
-  - script: ls
-    displayName: what files exist here?
 
   - task: DotNetCoreCLI@2
     displayName: Publishing .NET Application
