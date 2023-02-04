@@ -92,12 +92,11 @@
     "schemas": {
       "Berechnungsart": {
         "enum": [
-          1,
-          2,
-          3
+          "Umsatz",
+          "Haushaltssumme",
+          "AnzahlMitarbeiter"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Dokument": {
         "type": "object",
@@ -146,19 +145,17 @@
       },
       "Dokumenttyp": {
         "enum": [
-          1,
-          2
+          "Angebot",
+          "Versicherungsschein"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Risiko": {
         "enum": [
-          1,
-          2
+          "Gering",
+          "Mittel"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       }
     }
   }

@@ -1,6 +1,8 @@
+using CodeSpire.Api.Serialization;
 using CodeSpire.Application;
 using CodeSpire.Domain;
 using CodeSpire.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,11 @@ builder.Services.AddSwaggerGen(options =>
         Title = "CodeSpire API",
         Description = "An ASP.NET Core Web API for managing insurance policies"
     });
+});
+
+builder.Services.Configure<JsonOptions>(c =>
+{
+    c.JsonSerializerOptions.ConfigureJsonConverters();
 });
 
 builder.Services.AddInfrastructure(builder.Configuration);
