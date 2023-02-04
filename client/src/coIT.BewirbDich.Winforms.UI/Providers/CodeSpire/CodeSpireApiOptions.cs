@@ -3,11 +3,11 @@ using FluentValidation;
 
 namespace coIT.BewirbDich.Winforms.UI.Providers.CodeSpire;
 
-internal sealed record CodeSpireApiOptions
+public sealed record CodeSpireApiOptions
 {
     public const string ConfigurationSectionKey = "CodeSpireApi";
 
-    public string Url { get; init; } = default;
+    public string Url { get; init; } = string.Empty;
 }
 
 internal sealed class CodeSpireOptionsValidator : OptionsValidator<CodeSpireApiOptions>
