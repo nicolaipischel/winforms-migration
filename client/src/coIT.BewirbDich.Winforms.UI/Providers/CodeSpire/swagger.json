@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CodeSpire API",
+    "description": "An ASP.NET Core Web API for managing insurance policies",
+    "version": "v1"
+  },
+  "paths": {
+    "/documents": {
+      "get": {
+        "tags": [
+          "CodeSpire.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dokument"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CodeSpire.Api"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Dokument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CodeSpire.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/documents/{id}": {
+      "get": {
+        "tags": [
+          "CodeSpire.Api"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dokument"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Berechnungsart": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Dokument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "typ": {
+            "$ref": "#/components/schemas/Dokumenttyp"
+          },
+          "berechnungsart": {
+            "$ref": "#/components/schemas/Berechnungsart"
+          },
+          "berechnungbasis": {
+            "type": "number",
+            "format": "double"
+          },
+          "inkludiereZusatzschutz": {
+            "type": "boolean"
+          },
+          "zusatzschutzAufschlag": {
+            "type": "number",
+            "format": "float"
+          },
+          "hatWebshop": {
+            "type": "boolean"
+          },
+          "risiko": {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          "beitrag": {
+            "type": "number",
+            "format": "double"
+          },
+          "versicherungsscheinAusgestellt": {
+            "type": "boolean"
+          },
+          "versicherungssumme": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dokumenttyp": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Risiko": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}
