@@ -15,6 +15,12 @@ static class Program
         ApplicationConfiguration.Initialize();
 
         var builder = Host.CreateDefaultBuilder();
+
+        builder.ConfigureServices((context, services) =>
+        {
+            services.AddApiClient(context.Configuration);
+        });
+        
         var app = builder.Build();
         
         ServiceProvider = app.Services;
