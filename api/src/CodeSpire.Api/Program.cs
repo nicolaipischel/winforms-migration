@@ -11,6 +11,6 @@ var app = builder.Build();
 app.MapGet("/documents", (IRepository repo) => repo.List());
 app.MapGet("/documents/{id:guid}", (IRepository repo, Guid id) => repo.Find(id));
 app.MapPost("/documents", (IRepository repo, Dokument dokument) => repo.Add(dokument));
-app.MapPost("/documents", (IRepository repo) => repo.Save());
+app.MapPut("/documents", (IRepository repo) => repo.Save());
 
 app.Run();
