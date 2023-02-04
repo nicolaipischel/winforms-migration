@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
+    options.MapType<decimal>(() => new OpenApiSchema { Type = "number", Format = "decimal" });
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",

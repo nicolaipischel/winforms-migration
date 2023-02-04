@@ -115,7 +115,7 @@
           },
           "berechnungbasis": {
             "type": "number",
-            "format": "double"
+            "format": "decimal"
           },
           "inkludiereZusatzschutz": {
             "type": "boolean"
@@ -132,14 +132,14 @@
           },
           "beitrag": {
             "type": "number",
-            "format": "double"
+            "format": "decimal"
           },
           "versicherungsscheinAusgestellt": {
             "type": "boolean"
           },
           "versicherungssumme": {
             "type": "number",
-            "format": "double"
+            "format": "decimal"
           }
         },
         "additionalProperties": false
