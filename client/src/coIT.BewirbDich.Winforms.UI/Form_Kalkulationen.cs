@@ -1,17 +1,23 @@
-using coIT.BewirbDich.Winforms.Domain;
+using CodeSpire.Api.Client;
 using coIT.BewirbDich.Winforms.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Berechnungsart = coIT.BewirbDich.Winforms.Domain.Berechnungsart;
+using Dokument = coIT.BewirbDich.Winforms.Domain.Dokument;
+using Dokumenttyp = coIT.BewirbDich.Winforms.Domain.Dokumenttyp;
+using Risiko = coIT.BewirbDich.Winforms.Domain.Risiko;
 
 namespace coIT.BewirbDich.Winforms.UI;
 
 public partial class Form1 : Form
 {
     private readonly IRepository _repo;
-
+    private readonly IApiClient _api;
     private BindingSource _kalkulationen;
 
-    public Form1()
+    public Form1(IApiClient api)
     {
         InitializeComponent();
+        _api = api;
         _repo = new JsonRepository("database.json");
     }
 
@@ -101,11 +107,29 @@ public partial class Form1 : Form
         return kalkulation;
     }
 
-    private void Form1_Load(object sender, EventArgs e)
+    private async void Form1_Load(object sender, EventArgs e)
     {
+        var documents = await _api.DocumentsAllAsync();
+        var mapped = documents.Select(doc =>
+        {
+            return new Dokument
+            {
+                Beitrag = doc.Beitrag,
+                Berechnungbasis = doc.Berechnungbasis,
+                Berechnungsart = (Berechnungsart)doc.Berechnungsart,
+                Risiko = (Risiko)doc.Risiko,
+                Typ = (Dokumenttyp)doc.Typ,
+                Versicherungssumme = doc.Versicherungssumme,
+                HatWebshop = doc.HatWebshop,
+                InkludiereZusatzschutz = doc.InkludiereZusatzschutz,
+                VersicherungsscheinAusgestellt = doc.VersicherungsscheinAusgestellt,
+                ZusatzschutzAufschlag = doc.ZusatzschutzAufschlag
+            };
+        });
+        
         _kalkulationen = new BindingSource
         {
-            DataSource = _repo.List()
+            DataSource = mapped
         };
 
         ctrl_ListeKalkulationen.DataSource = _kalkulationen;

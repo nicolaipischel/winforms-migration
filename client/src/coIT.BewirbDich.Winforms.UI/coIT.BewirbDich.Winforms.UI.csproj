@@ -15,7 +15,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <OpenApiReference Include="Providers\CodeSpire\swagger.json" CodeGenerator="NSwagCSharp" Namespace="CodeSpire.Api.Client" ClassName="CodeSpireApiClient">
+        <OpenApiReference Include="Providers\CodeSpire\swagger.json" CodeGenerator="NSwagCSharp" Namespace="CodeSpire.Api.Client" ClassName="ApiClient">
             <SourceUri>http://localhost:5000/swagger/v1/swagger.json</SourceUri>
             <Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:true</Options>
         </OpenApiReference>
@@ -29,6 +29,12 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
     
 </Project>

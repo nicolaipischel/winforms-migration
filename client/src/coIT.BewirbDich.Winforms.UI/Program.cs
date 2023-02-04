@@ -1,8 +1,11 @@
+using CodeSpire.Api.Client;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace coIT.BewirbDich.Winforms.UI;
 
-static class Program
+internal static class Program
 {
     /// <summary>
     ///  The main entry point for the application.
@@ -13,19 +16,14 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
+        
+        var hostBuilder = Host.CreateDefaultBuilder();
 
-        var builder = Host.CreateDefaultBuilder();
+        hostBuilder.ConfigureServices((context, services) => services.RegisterDependencies(context.Configuration));
+        
+        var host = hostBuilder.Build();
+        var serviceProvider = host.Services;
 
-        builder.ConfigureServices((context, services) =>
-        {
-            services.AddApiClient(context.Configuration);
-        });
-        
-        var app = builder.Build();
-        
-        ServiceProvider = app.Services;
-        
-        Application.Run(new Form1());
+        Application.Run(serviceProvider.GetRequiredService<Form1>());
     }
-    internal static IServiceProvider ServiceProvider { get; private set; }
 }
