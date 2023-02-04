@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CodeSpire.Domain\CodeSpire.Domain.csproj" />
-      <ProjectReference Include="..\src\CodeSpire.Domain\CodeSpire.Domain.csproj" />
     </ItemGroup>
 
 </Project>
