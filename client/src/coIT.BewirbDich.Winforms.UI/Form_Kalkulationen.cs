@@ -1,16 +1,9 @@
-using CodeSpire.Api.Client;
-using coIT.BewirbDich.Winforms.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Berechnungsart = coIT.BewirbDich.Winforms.Domain.Berechnungsart;
-using Dokument = coIT.BewirbDich.Winforms.Domain.Dokument;
-using Dokumenttyp = coIT.BewirbDich.Winforms.Domain.Dokumenttyp;
-using Risiko = coIT.BewirbDich.Winforms.Domain.Risiko;
+using CodeSpire.Client;
 
 namespace coIT.BewirbDich.Winforms.UI;
 
 public partial class Form1 : Form
 {
-    private readonly IRepository _repo;
     private readonly IApiClient _api;
     private BindingSource _kalkulationen;
 
@@ -18,10 +11,9 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         _api = api;
-        _repo = new JsonRepository("database.json");
     }
 
-    private void ctr_NeueKalkulation_Click(object sender, EventArgs e)
+    private async void ctr_NeueKalkulation_Click(object sender, EventArgs e)
     {
         var neueKalkulationForm = new Form_NeueKalkulation();
 
@@ -29,7 +21,22 @@ public partial class Form1 : Form
         if (dialog == DialogResult.OK)
         {
             var neueKalkulation = neueKalkulationForm.Kalkulation;
-            _repo.Add(neueKalkulation);
+            
+            var req = new AddDocumentRequest
+            {
+                Beitrag = neueKalkulation.Beitrag,
+                Berechnungbasis = neueKalkulation.Berechnungbasis,
+                Berechnungsart = neueKalkulation.Berechnungsart,
+                Risiko = neueKalkulation.Risiko,
+                Typ = neueKalkulation.Typ,
+                Versicherungssumme = neueKalkulation.Versicherungssumme,
+                InkludiereZusatzschutz = neueKalkulation.InkludiereZusatzschutz,
+                HatWebshop = neueKalkulation.HatWebshop,
+                VersicherungsscheinAusgestellt = neueKalkulation.VersicherungsscheinAusgestellt,
+                ZusatzschutzAufschlag = neueKalkulation.ZusatzschutzAufschlag
+            };
+            
+            await _api.AddDocumentEndpointAsync(req);
             _kalkulationen.List.Add(neueKalkulation);
             _kalkulationen.ResetBindings(false);
         }
@@ -38,7 +45,7 @@ public partial class Form1 : Form
 
     private void ctrl_Speichern_Click(object sender, EventArgs e)
     {
-        _repo.Save();
+        _api.SaveDocumentsEndpointAsync();
         MessageBox.Show("Daten gespeichert.", "Vorgang", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
@@ -70,24 +77,29 @@ public partial class Form1 : Form
         }
     }
 
-    private void ctrl_AngebotAnnehmen_Click(object sender, EventArgs e)
+    private async void ctrl_AngebotAnnehmen_Click(object sender, EventArgs e)
     {
         var kalkulation = AuswahlEinlesen();
         if (kalkulation == null)
             return;
 
+        var docId = kalkulation.Id.ToString();
+        await _api.AcceptDocumentEndpointAsync(docId);
+
         kalkulation.Typ = Dokumenttyp.Versicherungsschein;
-        
+
         OptionenAnzeigen(kalkulation);
         _kalkulationen.ResetBindings(false);
     }
 
-    private void ctrl_VersicherungsscheinAusstellen_Click(object sender, EventArgs e)
+    private async void ctrl_VersicherungsscheinAusstellen_Click(object sender, EventArgs e)
     {
         var kalkulation = AuswahlEinlesen();
         if (kalkulation == null)
             return;
 
+        var docId = kalkulation.Id.ToString();
+        await _api.IssueDocumentEndpointAsync(docId);
         kalkulation.VersicherungsscheinAusgestellt = true;
         
         OptionenAnzeigen(kalkulation);
@@ -109,27 +121,11 @@ public partial class Form1 : Form
 
     private async void Form1_Load(object sender, EventArgs e)
     {
-        var documents = await _api.DocumentsAllAsync();
-        var mapped = documents.Select(doc =>
-        {
-            return new Dokument
-            {
-                Beitrag = doc.Beitrag,
-                Berechnungbasis = doc.Berechnungbasis,
-                Berechnungsart = (Berechnungsart)doc.Berechnungsart,
-                Risiko = (Risiko)doc.Risiko,
-                Typ = (Dokumenttyp)doc.Typ,
-                Versicherungssumme = doc.Versicherungssumme,
-                HatWebshop = doc.HatWebshop,
-                InkludiereZusatzschutz = doc.InkludiereZusatzschutz,
-                VersicherungsscheinAusgestellt = doc.VersicherungsscheinAusgestellt,
-                ZusatzschutzAufschlag = doc.ZusatzschutzAufschlag
-            };
-        });
-        
+        var response = await _api.ListDocumentsEndpointAsync(new CancellationToken());
+
         _kalkulationen = new BindingSource
         {
-            DataSource = mapped
+            DataSource = response.Documents.AsEnumerable()
         };
 
         ctrl_ListeKalkulationen.DataSource = _kalkulationen;

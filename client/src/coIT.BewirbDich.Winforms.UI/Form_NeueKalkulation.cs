@@ -1,10 +1,10 @@
-﻿using coIT.BewirbDich.Winforms.Domain;
+﻿using CodeSpire.Client;
 
 namespace coIT.BewirbDich.Winforms.UI
 {
     public partial class Form_NeueKalkulation : Form
     {
-        public Domain.Dokument Kalkulation { get; set; }
+        public Dokument Kalkulation { get; set; }
 
         public Form_NeueKalkulation()
         {

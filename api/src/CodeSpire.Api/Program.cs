@@ -1,49 +1,61 @@
-using CodeSpire.Api.Serialization;
-using CodeSpire.Application;
-using CodeSpire.Domain;
+global using FastEndpoints;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using CodeSpire.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
+using FastEndpoints.ClientGen;
+using FastEndpoints.Swagger;
+using NJsonSchema.CodeGeneration.CSharp;
+
+var apiVersion = "v1";
+var projectName = "CodeSpire";
 
 var builder = WebApplication.CreateBuilder(args);
 
-// needed for swashbuckle to find minimal api endpoints
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddFastEndpoints();
+builder.Services.AddSwaggerDoc(s =>
 {
-    options.MapType<decimal>(() => new OpenApiSchema { Type = "number", Format = "decimal" });
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "CodeSpire API",
-        Description = "An ASP.NET Core Web API for managing insurance policies"
-    });
-});
-
-builder.Services.Configure<JsonOptions>(c =>
+    s.DocumentName = apiVersion;
+    s.Title = $"{projectName} API";
+    s.Version = apiVersion;
+    s.Description = "An ASP.NET Core Web API for managing insurance policies";
+}, serializerSettings: o =>
 {
-    c.JsonSerializerOptions.ConfigureJsonConverters();
-});
+    o.PropertyNamingPolicy = null;
+    o.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+}, shortSchemaNames: true, removeEmptySchemas: true);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+app.UseAuthorization();
+app.UseFastEndpoints(c =>
+{
+    c.Endpoints.ShortNames = true;
+});
+
+const string apiClientName = "ApiClient";
+var nameSpace = $"{projectName}.Client";
+
+app.MapCSharpClientEndpoint("/csharp", apiVersion, s =>
+{
+    s.ClassName = apiClientName;
+    s.GenerateClientInterfaces = true;
+    s.CodeGeneratorSettings.PropertyNameGenerator = new CSharpPropertyNameGenerator();
+    s.CSharpGeneratorSettings.Namespace = nameSpace;
+});
+
+app.MapTypeScriptClientEndpoint("/typescript", apiVersion, s =>
+{
+    s.ClassName = apiClientName;
+    s.GenerateClientInterfaces = true;
+    s.TypeScriptGeneratorSettings.Namespace = nameSpace;
+});
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-});
-
-app.MapGet("/documents", (IRepository repo) => repo.List());
-app.MapGet("/documents/{id:guid}", (IRepository repo, Guid id) => repo.Find(id));
-app.MapPost("/documents", (IRepository repo, Dokument dokument) => repo.Add(dokument));
-app.MapPut("/documents", (IRepository repo) => repo.Save());
+app.UseSwaggerGen();
 
 app.Run();

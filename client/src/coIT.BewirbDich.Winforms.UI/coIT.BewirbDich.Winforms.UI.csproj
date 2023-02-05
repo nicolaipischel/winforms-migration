@@ -8,23 +8,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <StartupObject>coIT.BewirbDich.Winforms.UI.Program</StartupObject>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\coIT.BewirbDich..Winforms.Infrastructure\coIT.BewirbDich.Winforms.Infrastructure.csproj" />
-      <ProjectReference Include="..\coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Winforms.Domain.csproj" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <OpenApiReference Include="Providers\CodeSpire\swagger.json" CodeGenerator="NSwagCSharp" Namespace="CodeSpire.Api.Client" ClassName="ApiClient">
-            <SourceUri>http://localhost:5000/swagger/v1/swagger.json</SourceUri>
-            <Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:true</Options>
-        </OpenApiReference>
-    </ItemGroup>
     
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.4.0" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
       <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

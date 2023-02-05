@@ -1,5 +1,4 @@
-﻿
-using CodeSpire.Api.Client;
+﻿using CodeSpire.Client;
 using coIT.BewirbDich.Winforms.UI.Providers.CodeSpire;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
