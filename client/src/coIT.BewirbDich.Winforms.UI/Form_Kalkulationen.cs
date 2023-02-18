@@ -24,21 +24,16 @@ public partial class Form1 : Form
             
             var req = new AddDocumentRequest
             {
-                Beitrag = neueKalkulation.Beitrag,
-                Berechnungbasis = neueKalkulation.Berechnungbasis,
                 Berechnungsart = neueKalkulation.Berechnungsart,
                 Risiko = neueKalkulation.Risiko,
-                Typ = neueKalkulation.Typ,
                 Versicherungssumme = neueKalkulation.Versicherungssumme,
                 InkludiereZusatzschutz = neueKalkulation.InkludiereZusatzschutz,
                 HatWebshop = neueKalkulation.HatWebshop,
-                VersicherungsscheinAusgestellt = neueKalkulation.VersicherungsscheinAusgestellt,
                 ZusatzschutzAufschlag = neueKalkulation.ZusatzschutzAufschlag
             };
             
             await _api.AddDocumentEndpointAsync(req);
-            _kalkulationen.List.Add(neueKalkulation);
-            _kalkulationen.ResetBindings(false);
+            Form1_Load(new{},new EventArgs());
         }
 
     }

@@ -31,8 +31,6 @@ namespace coIT.BewirbDich.Winforms.UI
             kalkulation.HatWebshop = ctrl_HatWebshop.Checked;
             kalkulation.Versicherungssumme = decimal.Parse(ctrl_Versicherungssumme.Text);
 
-            Kalkuliere(kalkulation);
-
             Kalkulation = kalkulation;
 
             DialogResult = DialogResult.OK;

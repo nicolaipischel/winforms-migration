@@ -4,7 +4,7 @@ using CodeSpire.Domain.Models;
 namespace CodeSpire.Api.Features.AddDocument;
 
 // ReSharper disable once UnusedType.Global
-internal sealed partial class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
+internal sealed class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
 {
     private readonly IRepository _repo;
 
