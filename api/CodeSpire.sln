@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Domain.Test", "src\CodeSpire.Domain.Test\CodeSpire.Domain.Test.csproj", "{860466B7-A12E-4575-8345-A4D039E56720}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSpire.Api.Test", "src\CodeSpire.Api.Test\CodeSpire.Api.Test.csproj", "{C477A4F6-EE37-4DC9-A4B1-7900FA5EAAAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{860466B7-A12E-4575-8345-A4D039E56720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{860466B7-A12E-4575-8345-A4D039E56720}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{860466B7-A12E-4575-8345-A4D039E56720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C477A4F6-EE37-4DC9-A4B1-7900FA5EAAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C477A4F6-EE37-4DC9-A4B1-7900FA5EAAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C477A4F6-EE37-4DC9-A4B1-7900FA5EAAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C477A4F6-EE37-4DC9-A4B1-7900FA5EAAAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

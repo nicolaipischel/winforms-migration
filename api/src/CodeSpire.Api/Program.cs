@@ -1,5 +1,4 @@
 global using FastEndpoints;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using CodeSpire.Infrastructure;
 using FastEndpoints.ClientGen;
@@ -58,4 +57,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSwaggerGen();
 
-app.Run();
+await app.RunAsync();
+
+// Workaround for https://github.com/dotnet/aspnetcore/issues/38474
+public partial class Program { }
