@@ -52,10 +52,7 @@ public class JsonRepository : IRepository
 
     public void Save()
     {
-        var id = Guid.NewGuid();
-        var dict = new Dictionary<Guid, Dokument>();
-        dict.Add(id, new Dokument(id));
-        var json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+        var json = JsonConvert.SerializeObject(_dokumente, Formatting.Indented);
         File.WriteAllText(_file, json, new UTF8Encoding());
     }
 }
