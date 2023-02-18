@@ -18,6 +18,5 @@ stages:
   - template: ../.azure-pipelines/templates/stages/dotnet-build-stage.yaml
     parameters:
       solutionDirectory: ${{ variables.solutionDirectory }}
-      skipTests: true
       projectToPublish: ${{ variables.solutionDirectory }}/src/${{ variables.publishedProjectAssemblyName }}/${{ variables.publishedProjectAssemblyName }}.csproj
       dotnetArtifactname: ${{ variables.dotnetArtifactname }}
