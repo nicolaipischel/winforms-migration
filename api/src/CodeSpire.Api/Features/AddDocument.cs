@@ -31,7 +31,7 @@ internal sealed record AddDocumentRequest
     /// <summary>
     /// The percentage amount that is added on top for additional protection.
     /// </summary>
-    public float ZusatzschutzAufschlag { get; set; }
+    public float ZusatzschutzAufschlag { get; init; }
     
     /// <summary>
     /// Value indicating if the holder has a webshop.
@@ -85,8 +85,6 @@ internal sealed class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
         var documentId = Guid.NewGuid();
         var document = new Dokument(documentId)
         {
-            Beitrag = req.Beitrag,
-            Berechnungbasis = req.Berechnungbasis,
             Berechnungsart = req.Berechnungsart,
             Risiko = req.Risiko,
             Typ = req.Typ,
@@ -96,6 +94,7 @@ internal sealed class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
             VersicherungsscheinAusgestellt = req.VersicherungsscheinAusgestellt,
             ZusatzschutzAufschlag = req.ZusatzschutzAufschlag
         };
+        document.Kalkuliere();
         _repo.Add(document);
         return SendOkAsync(ct);
     }
