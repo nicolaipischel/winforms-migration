@@ -1,5 +1,6 @@
-﻿using CodeSpire.Application;
-using CodeSpire.Domain;
+﻿using CodeSpire.Domain;
+using CodeSpire.Domain.Interfaces;
+using CodeSpire.Domain.Models;
 
 namespace CodeSpire.Api.Features;
 

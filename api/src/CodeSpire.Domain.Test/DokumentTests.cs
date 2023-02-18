@@ -1,3 +1,4 @@
+using CodeSpire.Domain.Models;
 using FluentAssertions;
 
 namespace CodeSpire.Domain.Test;

@@ -1,4 +1,5 @@
-﻿using CodeSpire.Application;
+﻿using CodeSpire.Domain;
+using CodeSpire.Domain.Interfaces;
 
 namespace CodeSpire.Api.Features;
 

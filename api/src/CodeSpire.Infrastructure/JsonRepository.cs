@@ -1,6 +1,7 @@
 ﻿using System.Text;
-using CodeSpire.Application;
 using CodeSpire.Domain;
+using CodeSpire.Domain.Interfaces;
+using CodeSpire.Domain.Models;
 using Newtonsoft.Json;
 
 namespace CodeSpire.Infrastructure;

@@ -22,8 +22,4 @@
       <ProjectReference Include="..\CodeSpire.Domain\CodeSpire.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Haushaltsumme" />
-    </ItemGroup>
-
 </Project>

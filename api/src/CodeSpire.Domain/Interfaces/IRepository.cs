@@ -1,6 +1,6 @@
-﻿using CodeSpire.Domain;
+﻿using CodeSpire.Domain.Models;
 
-namespace CodeSpire.Application;
+namespace CodeSpire.Domain.Interfaces;
 
 public interface IRepository
 {

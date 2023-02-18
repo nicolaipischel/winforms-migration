@@ -1,4 +1,4 @@
-﻿namespace CodeSpire.Domain;
+﻿namespace CodeSpire.Domain.Models;
 
 public enum Risiko
 {

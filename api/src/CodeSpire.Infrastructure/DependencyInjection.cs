@@ -1,4 +1,5 @@
-﻿using CodeSpire.Application;
+﻿using CodeSpire.Domain;
+using CodeSpire.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
