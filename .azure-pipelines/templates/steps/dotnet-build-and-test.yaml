@@ -51,7 +51,6 @@ steps:
       arguments: --configuration $(BuildConfiguration) --output $(Pipeline.Workspace)/${{ parameters.dotnetArtifactName }} /p:EnableWindowsTargeting=true
       modifyOutputPath: false
       publishWebProjects: false
-      zipAfterPublish: true
 
   - publish: $(Pipeline.Workspace)/${{ parameters.dotnetArtifactName }}
     artifact: ${{ parameters.dotnetArtifactName }}
