@@ -20,7 +20,8 @@ internal sealed class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
         Description(b =>
         {
             b.Accepts<AddDocumentRequest>("application/json")
-             .Produces(200);
+             .Produces(201)
+             .Produces(400);
         });
     }
 
@@ -40,6 +41,7 @@ internal sealed class AddDocumentEndpoint : Endpoint<AddDocumentRequest>
         };
         document.Kalkuliere();
         _repo.Add(document);
-        return SendOkAsync(ct);
+        
+        return SendCreatedAtAsync<AddDocumentEndpoint>(new { id = document.Id }, null!, cancellation: ct);
     }
 }

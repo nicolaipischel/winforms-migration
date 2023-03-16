@@ -1,16 +1,6 @@
-﻿using CodeSpire.Domain;
-using CodeSpire.Domain.Interfaces;
-using CodeSpire.Domain.Models;
+﻿using CodeSpire.Domain.Interfaces;
 
-namespace CodeSpire.Api.Features;
-
-/// <summary>
-/// Response containing all available documents.
-/// </summary>
-internal sealed record ListDocumentsResponse
-{
-    public IReadOnlyCollection<Dokument> Documents { get; init; } = new List<Dokument>();
-}
+namespace CodeSpire.Api.Features.ListDocument;
 
 // ReSharper disable once UnusedType.Global
 internal sealed class ListDocumentsEndpoint : EndpointWithoutRequest<ListDocumentsResponse>

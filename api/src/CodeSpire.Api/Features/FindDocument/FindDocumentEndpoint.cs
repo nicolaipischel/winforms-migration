@@ -1,19 +1,6 @@
-﻿using CodeSpire.Domain;
-using CodeSpire.Domain.Interfaces;
-using CodeSpire.Domain.Models;
+﻿using CodeSpire.Domain.Interfaces;
 
-namespace CodeSpire.Api.Features;
-
-/// <summary>
-/// Response containing the requested Document.
-/// </summary>
-internal sealed record FindDocumentResponse
-{
-    /// <summary>
-    /// The requested document of null if no matching document was found.
-    /// </summary>
-    public Dokument? Document { get; init; }
-}
+namespace CodeSpire.Api.Features.FindDocument;
 
 // ReSharper disable once UnusedType.Global
 internal sealed class FindDocumentEndpoint : EndpointWithoutRequest<FindDocumentResponse>
@@ -32,7 +19,7 @@ internal sealed class FindDocumentEndpoint : EndpointWithoutRequest<FindDocument
         Description(b =>
         {
             b.Produces<FindDocumentResponse>(200, "application/json")
-             .Produces(204);
+             .Produces(404);
         });
     }
 

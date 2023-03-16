@@ -10,12 +10,12 @@ internal sealed record AddDocumentRequest
     /// <summary>
     /// The calculation method
     /// </summary>
-    public Berechnungsart Berechnungsart { get; set; }
+    public Berechnungsart Berechnungsart { get; init; }
 
     /// <summary>
     /// Value indicating whether additional protection is wanted.
     /// </summary>
-    public bool InkludiereZusatzschutz { get; set; }
+    public bool InkludiereZusatzschutz { get; init; }
     
     /// <summary>
     /// The percentage amount that is added on top for additional protection.
@@ -25,15 +25,15 @@ internal sealed record AddDocumentRequest
     /// <summary>
     /// Value indicating if the holder has a webshop.
     /// </summary>
-    public bool HatWebshop { get; set; }
+    public bool HatWebshop { get; init; }
 
     /// <summary>
     /// The risk that is estimated for the holder.
     /// </summary>
-    public Risiko Risiko { get; set; }
+    public Risiko Risiko { get; init; }
 
     /// <summary>
     /// The insured amount.
     /// </summary>
-    public decimal Versicherungssumme { get; set; }
+    public decimal Versicherungssumme { get; init; }
 }
